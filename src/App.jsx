@@ -91,7 +91,7 @@ function App() {
       <h1>Kitten App</h1>
       {/* <section> */}
       {randomFact && <p>{randomFact}</p>}
-      <img src={catImage} alt={`Image extracted using the first word of ${randomFact}`} />
+      {catImage && <img src={catImage} alt={`Image extracted using the first word of ${randomFact}`} />}
       {/* </section>    */}
     </main>
   )
