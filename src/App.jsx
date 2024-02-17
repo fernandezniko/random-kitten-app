@@ -25,14 +25,14 @@ function App() {
         setRandomFact(fact);
 
         const firstWord = fact.split(' ')[0];
-        /** obtener las 3 primeras palabras
+        /** ejemplo de como obtener las 3 primeras palabras
          * const firstThreeWords = fact.split(' ').slice(0, 3).join(' ');
          */
         const catResponse = await fetch(`${CATS_API_URL}/${firstWord}?json=true`);
         if (!catResponse.ok) throw new Error('Error al obtener la imagen del gato');
 
         const dataCat = await catResponse.json();
-        setCatImage(`${CAT_PREFIX_IMG_URL}${dataCat.url}`);
+        setCatImage(`${CAT_PREFIX_IMG_URL}/cat/${dataCat._id}/says/${firstWord}`);
 
       } catch (error) {
         //entra al catch tanto si hay error con la respuesta 
@@ -58,18 +58,20 @@ function App() {
 
   /**
    * DIVIDIR LOS USEEFFECT PARA TENER UNA RESPONSABILIDAD POR EFECTO
+   * efecto para recuperar la cita al cargar la pagina
    * useEffect( () => {
 
       const getRandomFact = async () => {
         const factResponse = await fetch(FACTS_API_URL);
         const dataFact = await factResponse.json();
-        const fact = dataFact.fact;
+        const fact = dataFact.fact; otra forma const { fact } = dataFact;
         setRandomFact(fact);        
       }
 
       getRandomFact();
       }, [])
 
+    efecto para recuperar la imagen cada vez que tenemos una nueva cita
     useEffect( () => {
 
       if(!randomFact) return;
