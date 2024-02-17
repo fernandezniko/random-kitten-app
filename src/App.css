@@ -9,7 +9,7 @@ main {
     gap: 2rem;
 }
 
-/*
+/* para alinearlo en fila
 section {
     display: flex;
     justify-content: space-between;
